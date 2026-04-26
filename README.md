@@ -16,7 +16,7 @@ Copy and paste the code from dailies.js into the file
 <br><br>
 Then change "sheetID" and "taskListName" to your sheet ID and task list name respectively
 <br><br>
-In the Appscript file click on services and add the Google Task API and the Google Sheet API
+In the Appscript file click on services and add the Google Tasks API and the Google Sheet API
 <img width="1202" height="999" alt="image" src="https://github.com/user-attachments/assets/0799a042-ab75-42f9-b3ae-4a7404b53f9d" />
 
 <br>
