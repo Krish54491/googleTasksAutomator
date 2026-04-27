@@ -1,114 +1,114 @@
 const sheetID = "" // change to your sheetID
 // Hardcoded from url because the other ways of obtaining google sheetid is through creating or it being active
 const taskListName = "" // change to the name of your google task list
-
+const offset = 50; 
+// positive to decrease chance at day off or double tasks, negative to increase make sure it's not a negative number bigger than totalLength or else it has no effect
+const bigTasks = ["Start or continue a Project",] 
+// this list is for tasks that are big(time consuming) enough that you don't have time for other tasks that day
 function addRandomTask() {
   // categories
   // change what's in the arrays to change what tasks you get
-  const workouts = [
-    "200 situps",
-    "100 situps",
-    "20 russian twists",
-    "40 russian twists",
-    "100 russian twists",
-    "100 squats",
-    "50 squats",
-    "40 pushups",
-    "20 pushups",
-    "Take a walk",
-    "Do a 2-Minute Plank",
-    "100 reverse situps",
-    "50 reverse situps",
-    "Do some light stretches",
-    "50 situps",
-    "10 pullups",
+  const allPossibleTasks =
+  [
+    [
+      "200 situps",
+      "100 situps",
+      "20 russian twists",
+      "40 russian twists",
+      "100 russian twists",
+      "100 squats",
+      "50 squats",
+      "40 pushups",
+      "20 pushups",
+      "Take a walk",
+      "Do a 2-Minute Plank",
+      "100 reverse situps",
+      "50 reverse situps",
+      "Do some light stretches",
+      "50 situps",
+      "10 pullups",
+    ],
+    [ 
+      "Study Japanese for 15 minutes",
+      "Do a page of your Genki notebook",
+      "Learn a new kanji",
+      "Practice a new word",
+      "Study a Japanese grammar point",
+      "Study Japanese sentence structure",
+      "Practice Japanese shadowing",
+      "Watch a Japanese YouTube video with subtitles",
+      "Practice kanji writing for 10 minutes",
+      "Listen to a Japanese podcast or song",
+      "Use a Japanese language learning app like Anki or Duolingo",
+      "Have a short conversation in Japanese (even if it's to yourself)"
+    ],
+    [
+      "Start or continue a Project",
+      "Do a LeetCode problem",
+      "Learn some of a coding language",
+      "Write a small update to a project",
+      "Review a coding project you've completed",
+      "Learn about a new data structure",
+      "Review a specific algorithm",
+      "Study design patterns",
+      "Plan to or participate in a coding challenge",
+      "Explore a new framework or library",
+      "Plan a side project",
+      "Write a brief summary of a coding concept",
+      "Build a mini game with code (like very mini)",
+      "Make or work on a video",
+    ],
+    [
+      "Take some photos (at least 3)",
+      "Make or work on a video",
+      "Do some light gaming",
+      "Learn a new skill online",
+      "Shave",
+      "Organize a meeting with friends or colleagues",
+      "Learn a productivity hack",
+      "Take up a new logic puzzle",
+      "Try to learn a party trick",
+      "Listen to a TED Talk",
+      "Listen to a podcast",
+      "Watch a tutorial",
+      "Plan tomorrow's outfit",
+      "Do a Meditation",
+      "Send a quick thank-you",
+      "Reflect on the day",
+      "Send a check-in message",
+      "Plan something with friends",
+      "Update your resume",
+      "Research local workshops",
+      "Attend a club",
+      "Organize a game night",
+      "Look at events going on campus for the week",
+      "Plan a hangout",
+      "Organize your paperwork",
+      "Review assignments for the week",
+      "Review your notes",
+      "Update your budget",
+      "Do a quick financial check-in",
+      "Check your bank account",
+      "Plan a DIY project",
+      "Add to your shopping list",
+      "Clean your room",
+      "Clean out your bag",
+      "Clean your glasses",
+      "Clean your keyboard",
+      "Back up files",
+      "Clear your cache",
+      "Read an article",
+      "Listen to some new songs",
+      "Watch an engineering video",
+      "Do all the main NY Times games",
+      "Research a quick fact or piece of trivia",
+      "Take an online personality quiz",
+      "Do some Pokedoku",
+      "Plan something with friends",
+      "Look at your crypto",
+      "Play a puzzle game like Sudoku or crossword",
+    ],
   ]
-  const languageLearning = [
-    "Study Japanese for 15 minutes",
-    "Do a page of your Genki notebook",
-    "Learn a new kanji",
-    "Practice a new word",
-    "Study a Japanese grammar point",
-    "Study Japanese sentence structure",
-    "Practice Japanese shadowing",
-    "Watch a Japanese YouTube video with subtitles",
-    "Practice kanji writing for 10 minutes",
-    "Listen to a Japanese podcast or song",
-    "Use a Japanese language learning app like Anki or Duolingo",
-    "Have a short conversation in Japanese (even if it's to yourself)"
-  ]
-  const tech = [
-    "Start or continue a Project",
-    "Do a LeetCode problem",
-    "Learn some of a coding language",
-    "Write a small update to a project",
-    "Review a coding project you've completed",
-    "Learn about a new data structure",
-    "Review a specific algorithm",
-    "Study design patterns",
-    "Plan to or participate in a coding challenge",
-    "Explore a new framework or library",
-    "Plan a side project",
-    "Write a brief summary of a coding concept",
-    "Build a mini game with code (like very mini)",
-    "Make or work on a video",
-    "Make or work on a video",
-  ]
-  const general = [
-    "Take some photos (at least 3)",
-    "Make or work on a video",
-    "Do some light gaming",
-    "Learn a new skill online",
-    "Shave",
-    "Organize a meeting with friends or colleagues",
-    "Learn a productivity hack",
-    "Take up a new logic puzzle",
-    "Try to learn a party trick",
-    "Listen to a TED Talk",
-    "Listen to a podcast",
-    "Watch a tutorial",
-    "Plan tomorrow's outfit",
-    "Do a Meditation",
-    "Send a quick thank-you",
-    "Reflect on the day",
-    "Send a check-in message",
-    "Plan something with friends",
-    "Update your resume",
-    "Research local workshops",
-    "Attend a club",
-    "Organize a game night",
-    "Look at events going on campus for the week",
-    "Plan a hangout",
-    "Organize your paperwork",
-    "Review assignments for the week",
-    "Review your notes",
-    "Update your budget",
-    "Do a quick financial check-in",
-    "Check your bank account",
-    "Plan a DIY project",
-    "Add to your shopping list",
-    "Clean your room",
-    "Clean out your bag",
-    "Clean your glasses",
-    "Clean your keyboard",
-    "Back up files",
-    "Clear your cache",
-    "Read an article",
-    "Listen to some new songs",
-    "Watch an engineering video",
-    "Do all the main NY Times games",
-    "Research a quick fact or piece of trivia",
-    "Take an online personality quiz",
-    "Do some Pokedoku",
-    "Plan something with friends",
-    "Look at your crypto",
-    "Play a puzzle game like Sudoku or crossword",
-    "DAY OFF",
-    "DAY OFF",
-    "DAY OFF",
-    "ALL IN",
-  ]
-
   const taskLists = Tasks.Tasklists.list().items;
   let tasksAdded = [];
   // Replace with your actual task list ID
@@ -126,60 +126,42 @@ function addRandomTask() {
   const dueDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 11:59 in CST the -5 is added to change from orginal UTC 
   // Convert the due date to RFC3339 format
   const dueDateISO = dueDate.toISOString();
-  let workoutTask = workouts[Math.floor(Math.random() * workouts.length)];
-  let languageTask = languageLearning[Math.floor(Math.random() * languageLearning.length)];
-  let generalTask = general[Math.floor(Math.random() * general.length)];
-  let techTask = tech[Math.floor(Math.random() * tech.length)];
-  
-  
+  let totalLength = 0;
+  for(let i = 0; i < allPossibleTasks.length; i++){
+    let n = allPossibleTasks[i].length
+    tasksAdded.push(allPossibleTasks[i][Math.floor(Math.random() * n)])
+    totalLength += n;
+  }
+  totalLength = totalLength + offset <= 0 ? totalLength : totalLength + offset;
   //while(tasksAdded.includes(workoutTask)){
   //  workoutTask = workouts[Math.floor(Math.random() * workouts.length)];
   //}
-  if(generalTask === "DAY OFF"){
+  if((Math.random() * totalLength) === 0){ // adjust totalLength to increase or decrease chance of day off 
     return;
   }
-  if(techTask === 'Start or continue a Project'){
-    Tasks.Tasks.insert(
-      {
-        title: techTask,
-        due: dueDateISO
-      },
-      taskListId
-    );
-    return;
+  for(let i = 0; i < bigTasks.length; i++){
+    if(tasksAdded.includes(bigTasks[i])){
+      Tasks.Tasks.insert(
+        {
+          title: bigTasks[i],
+          due: dueDateISO
+        },
+        taskListId
+      );
+      return;
+    }
   }
-  if(generalTask === "ALL IN"){
-    while(generalTask === "ALL IN" || generalTask === "DAY OFF"){
-      generalTask = general[Math.floor(Math.random() * general.length)];
-    }
-    tasksAdded.push(generalTask);
-    while(generalTask === "ALL IN" || generalTask === "DAY OFF"){
-      generalTask = general[Math.floor(Math.random() * general.length)];
-    }
-    tasksAdded.push(techTask);
-    const tempTech = techTask;
-    while(techTask === tempTech ||techTask === 'Start or continue a Project'){
-      techTask = techTask[Math.random() * tech.length];
-    } 
-    tasksAdded.push(workoutTask);
-    tasksAdded.push(languageTask);
-    const tempWorkout = workoutTask;
-    while(workoutTask === tempWorkout){
-      workoutTask = workouts[Math.random() * workouts.length];
-    }
-    const tempLanguage = languageTask;
-    while(languageTask === tempLanguage){
-      languageTask = languageLearning[Math.random() * languageLearning.length];
-    }
 
+  if((Math.random() * totalLength + 1) === 1){
+    for(let i = 0; i < allPossibleTasks.length; i++){
+      let n = allPossibleTasks[i].length
+      let tempTask = allPossibleTasks[i][Math.floor(Math.random() * n)]
+      while(tasksAdded.includes(tempTask)){
+        tempTask = allPossibleTasks[i][Math.floor(Math.random() * n)]
+      }
+      tasksAdded.push(tempTask)
+    }
   }
-  
-
-  tasksAdded.push(techTask);
-  tasksAdded.push(generalTask);
-  tasksAdded.push(workoutTask);
-  tasksAdded.push(languageTask);
-
   for(let i = 0; i < tasksAdded.length; i++){
     let task = tasksAdded[i];
     Tasks.Tasks.insert(
