@@ -5,12 +5,15 @@ Automate tasks being added to your google tasks list daily and randomize them ju
 ### Setup
 First, Create a Google tasks account and create a list(if you already have one just make a list)
 <br><br>
-Second, Create a Google Sheet and get the Sheet ID
+Second, Copy this Google Sheet
+https://docs.google.com/spreadsheets/d/1H59ykTar29_TKtB_Iv0a4_AbqtHa9ssKv2kgU6y3e3s/edit?usp=sharing 
+<br>Get the Sheet ID
 <img width="896" height="151" alt="Screenshot 2026-04-26 021335" src="https://github.com/user-attachments/assets/36593fa7-4207-4ed6-aee3-bd8b96a741b8" />
 <br>
 Should be in the url as depicted
 <br><br>
 Then create a Appscript file
+<br>
 <img width="650" height="596" alt="image" src="https://github.com/user-attachments/assets/fa1591a2-b8a6-4e69-bdd7-ce64816b4ee3" />
 <br>
 Copy and paste the code from dailies.js into the file
